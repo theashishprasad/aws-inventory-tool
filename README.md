@@ -8,13 +8,15 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 1 Features
+## Version 2 Features
 
 * Read inventory data from a JSON file
 * Parse JSON into Go structs
 * Generate a formatted inventory report
 * Handle file reading errors gracefully
 * Handle JSON parsing errors gracefully
+* Organize code using reusable Go packages
+* Separate application logic from business logic
 
 ## Learning Objectives
 
@@ -27,10 +29,18 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * File Reading
 * Error Handling
 
+### Completed in Version 2
+
+* Packages
+* Separation of Concerns
+* Exported Functions
+* Code Organization
+* Reusable Components
+
 ### Upcoming
 
-* Packages and project organization
 * AWS SDK for Go
+* Cloud APIs
 * CLI applications
 * JSON export
 * Concurrency
@@ -45,7 +55,7 @@ Parse inventory data from a JSON file. ✅
 
 ### Version 2
 
-Move logic into reusable packages.
+Move logic into reusable packages. ✅
 
 ### Version 3
 
@@ -84,6 +94,8 @@ Production-ready inventory reporting tool.
 ```text
 aws-inventory-tool/
 ├── main.go
+├── inventory/
+│   └── inventory.go
 ├── models/
 │   └── inventory.go
 ├── sample/
@@ -161,6 +173,7 @@ Error: ...
 * Go
 * JSON
 * Structs
+* Packages
 * File I/O
 * Error Handling
 
@@ -171,6 +184,8 @@ Through this project I practiced:
 * Reading files in Go
 * Parsing JSON using json.Unmarshal
 * Working with structs and struct tags
+* Creating reusable Go packages
+* Separating business logic from application logic
 * Handling errors using idiomatic Go patterns
 * Building a simple CLI application
 * Mapping JSON data to Go data structures
@@ -180,5 +195,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.1.0
+v0.2.0
 ```
