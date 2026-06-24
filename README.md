@@ -1,6 +1,6 @@
 # AWS Inventory Tool
 
-A Go CLI application that reads AWS inventory data from a JSON file and generates a simple inventory report.
+A Go CLI application that collects AWS infrastructure inventory using the AWS SDK for Go and generates simple inventory reports.
 
 This project is part of my Go learning journey focused on DevOps, Platform Engineering, Cloud Infrastructure, and Automation.
 
@@ -8,13 +8,14 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 2 Features
+## Version 3 Features
 
-* Read inventory data from a JSON file
-* Parse JSON into Go structs
+* Collect EC2 inventory using AWS SDK for Go v2
+* Discover AWS credentials using the default credential chain
+* Connect to AWS APIs programmatically
+* Count EC2 instances across reservations
 * Generate a formatted inventory report
-* Handle file reading errors gracefully
-* Handle JSON parsing errors gracefully
+* Handle AWS SDK errors gracefully
 * Organize code using reusable Go packages
 * Separate application logic from business logic
 
@@ -37,10 +38,20 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Code Organization
 * Reusable Components
 
+### Completed in Version 3
+
+* AWS SDK for Go v2
+* Cloud APIs
+* AWS Authentication Chain
+* config.LoadDefaultConfig()
+* EC2 Client Creation
+* DescribeInstances API
+* API Response Processing
+* Infrastructure Inventory Collection
+
 ### Upcoming
 
-* AWS SDK for Go
-* Cloud APIs
+* Multiple AWS Services
 * CLI applications
 * JSON export
 * Concurrency
@@ -59,7 +70,7 @@ Move logic into reusable packages. ✅
 
 ### Version 3
 
-Collect EC2 inventory using AWS SDK.
+Collect EC2 inventory using AWS SDK. ✅
 
 ### Version 4
 
@@ -98,11 +109,24 @@ aws-inventory-tool/
 │   └── inventory.go
 ├── models/
 │   └── inventory.go
-├── sample/
-│   └── inventory.json
 ├── README.md
 ├── .gitignore
-└── go.mod
+├── go.mod
+└── go.sum
+```
+
+## Prerequisites
+
+Install and configure AWS CLI:
+
+```bash
+aws configure
+```
+
+Verify credentials:
+
+```bash
+aws sts get-caller-identity
 ```
 
 ## How to Run
@@ -113,46 +137,38 @@ Run the application:
 go run main.go
 ```
 
-## Sample Input
-
-```json
-{
-  "instance_count": 12,
-  "region": "ap-south-1"
-}
-```
-
 ## Sample Output
 
 ```text
 AWS Inventory Report
 
 Instances : 12
-Region    : ap-south-1
 ```
+
+> The actual instance count depends on the AWS account and region configured on your machine.
 
 ## Validation
 
 ```bash
 go fmt ./...
+go mod tidy
 go build ./...
 go run main.go
 ```
 
 ## Manual Tests
 
-### Valid JSON
+### Valid AWS Credentials
 
 Expected:
 
 ```text
 AWS Inventory Report
 
-Instances : 12
-Region    : ap-south-1
+Instances : X
 ```
 
-### Missing File
+### Missing AWS Credentials
 
 Expected:
 
@@ -160,40 +176,51 @@ Expected:
 Error: ...
 ```
 
-### Invalid JSON
+### Invalid AWS Credentials
 
 Expected:
 
 ```text
 Error: ...
+```
+
+### No EC2 Instances
+
+Expected:
+
+```text
+AWS Inventory Report
+
+Instances : 0
 ```
 
 ## Technologies Used
 
 * Go
-* JSON
-* Structs
+* AWS SDK for Go v2
+* Amazon EC2
+* Cloud APIs
 * Packages
-* File I/O
 * Error Handling
 
 ## Learning Outcomes
 
 Through this project I practiced:
 
-* Reading files in Go
-* Parsing JSON using json.Unmarshal
-* Working with structs and struct tags
+* Using the AWS SDK for Go v2
+* Authenticating with AWS using the default credential chain
+* Creating AWS service clients
+* Calling cloud APIs programmatically
+* Processing AWS API responses
 * Creating reusable Go packages
 * Separating business logic from application logic
-* Handling errors using idiomatic Go patterns
-* Building a simple CLI application
-* Mapping JSON data to Go data structures
+* Handling cloud API errors
+* Building infrastructure automation tooling
 
 ## Version
 
 Current Version:
 
 ```text
-v0.2.0
+v0.3.0
 ```
