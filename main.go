@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	inventoryData, err := inventory.LoadInventory("sample/inventory.json")
+	inventoryData, err := inventory.LoadInventory()
 	if err != nil {
 		fmt.Println("Error: ", err)
 		return
@@ -17,5 +17,4 @@ func main() {
 	fmt.Println()
 
 	fmt.Printf("Instances : %d\n", inventoryData.InstanceCount)
-	fmt.Printf("Region    : %s\n", inventoryData.Region)
 }
