@@ -16,5 +16,6 @@ func main() {
 	fmt.Println("AWS Inventory Report")
 	fmt.Println()
 
-	fmt.Printf("Instances : %d\n", inventoryData.InstanceCount)
+	fmt.Printf("EC2 Instances : %d\n", inventoryData.InstanceCount)
+	fmt.Printf("S3 Buckets    : %d\n", inventoryData.BucketCount)
 }
