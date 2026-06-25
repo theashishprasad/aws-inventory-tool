@@ -1,6 +1,6 @@
 # AWS Inventory Tool
 
-A Go CLI application that collects AWS infrastructure inventory using the AWS SDK for Go and generates simple inventory reports.
+A Go CLI application that collects AWS infrastructure inventory using the AWS SDK for Go and generates inventory reports across multiple AWS services.
 
 This project is part of my Go learning journey focused on DevOps, Platform Engineering, Cloud Infrastructure, and Automation.
 
@@ -8,12 +8,15 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 3 Features
+## Version 4 Features
 
 * Collect EC2 inventory using AWS SDK for Go v2
+* Collect Amazon S3 bucket inventory
+* Aggregate inventory across multiple AWS services
 * Discover AWS credentials using the default credential chain
 * Connect to AWS APIs programmatically
 * Count EC2 instances across reservations
+* Count Amazon S3 buckets
 * Generate a formatted inventory report
 * Handle AWS SDK errors gracefully
 * Organize code using reusable Go packages
@@ -49,9 +52,19 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * API Response Processing
 * Infrastructure Inventory Collection
 
-### Upcoming
+### Completed in Version 4
 
 * Multiple AWS Services
+* Amazon S3 SDK
+* s3.NewFromConfig()
+* ListBuckets API
+* Aggregation
+* Multi-Service Reporting
+* Shared AWS Configuration
+* Inventory Consolidation
+
+### Upcoming
+
 * CLI applications
 * JSON export
 * Concurrency
@@ -74,7 +87,7 @@ Collect EC2 inventory using AWS SDK. ✅
 
 ### Version 4
 
-Add S3 inventory collection.
+Add S3 inventory collection. ✅
 
 ### Version 5
 
@@ -142,10 +155,11 @@ go run main.go
 ```text
 AWS Inventory Report
 
-Instances : 12
+EC2 Instances : 12
+S3 Buckets    : 8
 ```
 
-> The actual instance count depends on the AWS account and region configured on your machine.
+> The actual resource counts depend on the AWS account and region configured on your machine.
 
 ## Validation
 
@@ -165,7 +179,8 @@ Expected:
 ```text
 AWS Inventory Report
 
-Instances : X
+EC2 Instances : X
+S3 Buckets    : Y
 ```
 
 ### Missing AWS Credentials
@@ -191,7 +206,19 @@ Expected:
 ```text
 AWS Inventory Report
 
-Instances : 0
+EC2 Instances : 0
+S3 Buckets    : Y
+```
+
+### No S3 Buckets
+
+Expected:
+
+```text
+AWS Inventory Report
+
+EC2 Instances : X
+S3 Buckets    : 0
 ```
 
 ## Technologies Used
@@ -199,6 +226,7 @@ Instances : 0
 * Go
 * AWS SDK for Go v2
 * Amazon EC2
+* Amazon S3
 * Cloud APIs
 * Packages
 * Error Handling
@@ -210,8 +238,9 @@ Through this project I practiced:
 * Using the AWS SDK for Go v2
 * Authenticating with AWS using the default credential chain
 * Creating AWS service clients
-* Calling cloud APIs programmatically
+* Calling multiple AWS APIs programmatically
 * Processing AWS API responses
+* Aggregating infrastructure inventory across services
 * Creating reusable Go packages
 * Separating business logic from application logic
 * Handling cloud API errors
@@ -222,5 +251,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.3.0
+v0.4.0
 ```
