@@ -8,10 +8,12 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 4 Features
+## Version 5 Features
 
 * Collect EC2 inventory using AWS SDK for Go v2
 * Collect Amazon S3 bucket inventory
+* Accept AWS region as a command-line argument
+* Configure AWS SDK region at runtime
 * Aggregate inventory across multiple AWS services
 * Discover AWS credentials using the default credential chain
 * Connect to AWS APIs programmatically
@@ -19,6 +21,7 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Count Amazon S3 buckets
 * Generate a formatted inventory report
 * Handle AWS SDK errors gracefully
+* Validate command-line input
 * Organize code using reusable Go packages
 * Separate application logic from business logic
 
@@ -63,9 +66,18 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Shared AWS Configuration
 * Inventory Consolidation
 
+### Completed in Version 5
+
+* os.Args
+* Command-Line Applications
+* CLI Input Validation
+* Runtime Configuration
+* config.WithRegion()
+* AWS Region Selection
+* Parameterized Cloud API Requests
+
 ### Upcoming
 
-* CLI applications
 * JSON export
 * Concurrency
 * Context and timeouts
@@ -91,7 +103,7 @@ Add S3 inventory collection. ✅
 
 ### Version 5
 
-Accept AWS region as command-line input.
+Accept AWS region as command-line input. ✅
 
 ### Version 6
 
@@ -144,10 +156,10 @@ aws sts get-caller-identity
 
 ## How to Run
 
-Run the application:
+Run the application by providing the AWS region:
 
 ```bash
-go run main.go
+go run main.go ap-south-1
 ```
 
 ## Sample Output
@@ -155,6 +167,7 @@ go run main.go
 ```text
 AWS Inventory Report
 
+Region        : ap-south-1
 EC2 Instances : 12
 S3 Buckets    : 8
 ```
@@ -167,20 +180,37 @@ S3 Buckets    : 8
 go fmt ./...
 go mod tidy
 go build ./...
-go run main.go
+go run main.go ap-south-1
 ```
 
 ## Manual Tests
 
-### Valid AWS Credentials
+### Valid Region
 
 Expected:
 
 ```text
 AWS Inventory Report
 
+Region        : ap-south-1
 EC2 Instances : X
 S3 Buckets    : Y
+```
+
+### Missing CLI Argument
+
+Expected:
+
+```text
+Usage: go run main.go <aws-region>
+```
+
+### Invalid Region
+
+Expected:
+
+```text
+Error: ...
 ```
 
 ### Missing AWS Credentials
@@ -206,6 +236,7 @@ Expected:
 ```text
 AWS Inventory Report
 
+Region        : ap-south-1
 EC2 Instances : 0
 S3 Buckets    : Y
 ```
@@ -217,6 +248,7 @@ Expected:
 ```text
 AWS Inventory Report
 
+Region        : ap-south-1
 EC2 Instances : X
 S3 Buckets    : 0
 ```
@@ -241,6 +273,9 @@ Through this project I practiced:
 * Calling multiple AWS APIs programmatically
 * Processing AWS API responses
 * Aggregating infrastructure inventory across services
+* Building CLI applications using `os.Args`
+* Passing runtime configuration into AWS SDK clients
+* Configuring AWS SDK with custom regions
 * Creating reusable Go packages
 * Separating business logic from application logic
 * Handling cloud API errors
@@ -251,5 +286,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.4.0
+v0.5.0
 ```
