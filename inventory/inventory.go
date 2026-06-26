@@ -9,12 +9,12 @@ import (
 	"github.com/theashishprasad/aws-inventory-tool/models"
 )
 
-func LoadInventory() (models.Inventory, error) {
+func LoadInventory(region string) (models.Inventory, error) {
 	var inventory models.Inventory
 
 	ctx := context.Background()
 
-	cfg, err := config.LoadDefaultConfig(ctx)
+	cfg, err := config.LoadDefaultConfig(ctx, config.WithRegion(region))
 	if err != nil {
 		return inventory, err
 	}
@@ -41,6 +41,8 @@ func LoadInventory() (models.Inventory, error) {
 	}
 
 	inventory.BucketCount = len(buckets.Buckets)
+
+	inventory.Region = cfg.Region
 
 	return inventory, nil
 }
