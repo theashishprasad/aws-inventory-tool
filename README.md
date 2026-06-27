@@ -8,12 +8,13 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 5 Features
+## Version 6 Features
 
 * Collect EC2 inventory using AWS SDK for Go v2
 * Collect Amazon S3 bucket inventory
 * Accept AWS region as a command-line argument
 * Configure AWS SDK region at runtime
+* Export inventory data to a JSON file
 * Aggregate inventory across multiple AWS services
 * Discover AWS credentials using the default credential chain
 * Connect to AWS APIs programmatically
@@ -76,9 +77,18 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * AWS Region Selection
 * Parameterized Cloud API Requests
 
+### Completed in Version 6
+
+* json.MarshalIndent()
+* JSON Serialization
+* Pretty-Printed JSON
+* File Writing
+* os.WriteFile()
+* Data Export
+* Structured Output
+
 ### Upcoming
 
-* JSON export
 * Concurrency
 * Context and timeouts
 * Unit testing
@@ -107,7 +117,7 @@ Accept AWS region as command-line input. ✅
 
 ### Version 6
 
-Export inventory as JSON.
+Export inventory as JSON. ✅
 
 ### Version 7
 
@@ -162,7 +172,17 @@ Run the application by providing the AWS region:
 go run main.go ap-south-1
 ```
 
+After a successful run, the application generates:
+
+```text
+inventory.json
+```
+
+in the project root.
+
 ## Sample Output
+
+Console:
 
 ```text
 AWS Inventory Report
@@ -170,6 +190,18 @@ AWS Inventory Report
 Region        : ap-south-1
 EC2 Instances : 12
 S3 Buckets    : 8
+
+Inventory exported to inventory.json
+```
+
+Generated file (`inventory.json`):
+
+```json
+{
+  "region": "ap-south-1",
+  "instances": 12,
+  "buckets": 8
+}
 ```
 
 > The actual resource counts depend on the AWS account and region configured on your machine.
@@ -182,6 +214,8 @@ go mod tidy
 go build ./...
 go run main.go ap-south-1
 ```
+
+Verify that `inventory.json` is created after execution.
 
 ## Manual Tests
 
@@ -196,6 +230,8 @@ Region        : ap-south-1
 EC2 Instances : X
 S3 Buckets    : Y
 ```
+
+An `inventory.json` file should also be generated.
 
 ### Missing CLI Argument
 
@@ -259,6 +295,7 @@ S3 Buckets    : 0
 * AWS SDK for Go v2
 * Amazon EC2
 * Amazon S3
+* JSON
 * Cloud APIs
 * Packages
 * Error Handling
@@ -276,6 +313,9 @@ Through this project I practiced:
 * Building CLI applications using `os.Args`
 * Passing runtime configuration into AWS SDK clients
 * Configuring AWS SDK with custom regions
+* Serializing Go structs into JSON
+* Exporting structured data using `json.MarshalIndent`
+* Writing files using `os.WriteFile`
 * Creating reusable Go packages
 * Separating business logic from application logic
 * Handling cloud API errors
@@ -286,5 +326,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.5.0
+v0.6.0
 ```

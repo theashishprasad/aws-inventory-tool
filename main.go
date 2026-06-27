@@ -26,4 +26,12 @@ func main() {
 	fmt.Printf("Region        : %s\n", inventoryData.Region)
 	fmt.Printf("EC2 Instances : %d\n", inventoryData.InstanceCount)
 	fmt.Printf("S3 Buckets    : %d\n", inventoryData.BucketCount)
+
+	err = inventory.ExportInventory("inventory.json", inventoryData)
+	if err != nil {
+		fmt.Println("Error:", err)
+		return
+	}
+
+	fmt.Println("\nInventory exported to inventory.json")
 }

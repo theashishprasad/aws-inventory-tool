@@ -1,7 +1,7 @@
 package models
 
 type Inventory struct {
-	Region        string
-	InstanceCount int
-	BucketCount   int
+	Region        string `json:"region"`
+	InstanceCount int    `json:"instances"`
+	BucketCount   int    `json:"buckets"`
 }

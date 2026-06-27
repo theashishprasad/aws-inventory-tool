@@ -2,6 +2,8 @@ package inventory
 
 import (
 	"context"
+	"encoding/json"
+	"os"
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
@@ -45,4 +47,18 @@ func LoadInventory(region string) (models.Inventory, error) {
 	inventory.Region = cfg.Region
 
 	return inventory, nil
+}
+
+func ExportInventory(fileName string, inventory models.Inventory) error {
+	jsonData, err := json.MarshalIndent(inventory, "", "	")
+	if err != nil {
+		return err
+	}
+
+	err = os.WriteFile(fileName, jsonData, 0644)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
