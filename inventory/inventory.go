@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"os"
+	"sync"
 
 	"github.com/aws/aws-sdk-go-v2/config"
 	"github.com/aws/aws-sdk-go-v2/service/ec2"
@@ -12,7 +13,10 @@ import (
 )
 
 func LoadInventory(region string) (models.Inventory, error) {
+	var wg sync.WaitGroup
 	var inventory models.Inventory
+	var ec2Err error
+	var s3Err error
 
 	ctx := context.Background()
 
@@ -21,28 +25,52 @@ func LoadInventory(region string) (models.Inventory, error) {
 		return inventory, err
 	}
 
-	ec2Client := ec2.NewFromConfig(cfg)
+	wg.Add(1)
 
-	instances, err := ec2Client.DescribeInstances(ctx, &ec2.DescribeInstancesInput{})
-	if err != nil {
-		return inventory, err
+	go func() {
+		defer wg.Done()
+
+		ec2Client := ec2.NewFromConfig(cfg)
+
+		instances, err := ec2Client.DescribeInstances(ctx, &ec2.DescribeInstancesInput{})
+		if err != nil {
+			ec2Err = err
+			return
+		}
+
+		instanceCount := 0
+
+		for _, r := range instances.Reservations {
+			instanceCount += len(r.Instances)
+		}
+
+		inventory.InstanceCount = instanceCount
+	}()
+
+	wg.Add(1)
+
+	go func() {
+		defer wg.Done()
+
+		s3Client := s3.NewFromConfig(cfg)
+		buckets, err := s3Client.ListBuckets(ctx, &s3.ListBucketsInput{})
+		if err != nil {
+			s3Err = err
+			return
+		}
+
+		inventory.BucketCount = len(buckets.Buckets)
+	}()
+
+	wg.Wait()
+
+	if ec2Err != nil {
+		return inventory, ec2Err
 	}
 
-	instanceCount := 0
-
-	for _, r := range instances.Reservations {
-		instanceCount += len(r.Instances)
+	if s3Err != nil {
+		return inventory, s3Err
 	}
-
-	inventory.InstanceCount = instanceCount
-
-	s3Client := s3.NewFromConfig(cfg)
-	buckets, err := s3Client.ListBuckets(ctx, &s3.ListBucketsInput{})
-	if err != nil {
-		return inventory, err
-	}
-
-	inventory.BucketCount = len(buckets.Buckets)
 
 	inventory.Region = cfg.Region
 

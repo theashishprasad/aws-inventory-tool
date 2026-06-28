@@ -8,10 +8,12 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 6 Features
+## Version 7 Features
 
 * Collect EC2 inventory using AWS SDK for Go v2
 * Collect Amazon S3 bucket inventory
+* Collect AWS inventory concurrently using goroutines
+* Synchronize concurrent tasks using `sync.WaitGroup`
 * Accept AWS region as a command-line argument
 * Configure AWS SDK region at runtime
 * Export inventory data to a JSON file
@@ -87,9 +89,19 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Data Export
 * Structured Output
 
+### Completed in Version 7
+
+* Goroutines
+* Concurrent Programming
+* sync.WaitGroup
+* WaitGroup.Add()
+* WaitGroup.Done()
+* WaitGroup.Wait()
+* Concurrent API Calls
+* Basic Synchronization
+
 ### Upcoming
 
-* Concurrency
 * Context and timeouts
 * Unit testing
 
@@ -121,7 +133,7 @@ Export inventory as JSON. ✅
 
 ### Version 7
 
-Collect inventory concurrently.
+Collect inventory concurrently. ✅
 
 ### Version 8
 
@@ -212,6 +224,7 @@ Generated file (`inventory.json`):
 go fmt ./...
 go mod tidy
 go build ./...
+go test -race ./...
 go run main.go ap-south-1
 ```
 
@@ -289,6 +302,20 @@ EC2 Instances : X
 S3 Buckets    : 0
 ```
 
+### Race Detection
+
+Run:
+
+```bash
+go test -race ./...
+```
+
+Expected:
+
+```text
+PASS
+```
+
 ## Technologies Used
 
 * Go
@@ -296,6 +323,8 @@ S3 Buckets    : 0
 * Amazon EC2
 * Amazon S3
 * JSON
+* Goroutines
+* sync.WaitGroup
 * Cloud APIs
 * Packages
 * Error Handling
@@ -316,6 +345,8 @@ Through this project I practiced:
 * Serializing Go structs into JSON
 * Exporting structured data using `json.MarshalIndent`
 * Writing files using `os.WriteFile`
+* Using goroutines for concurrent execution
+* Coordinating concurrent tasks using `sync.WaitGroup`
 * Creating reusable Go packages
 * Separating business logic from application logic
 * Handling cloud API errors
@@ -326,5 +357,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.6.0
+v0.7.0
 ```
