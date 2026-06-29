@@ -8,12 +8,14 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 7 Features
+## Version 8 Features
 
 * Collect EC2 inventory using AWS SDK for Go v2
 * Collect Amazon S3 bucket inventory
 * Collect AWS inventory concurrently using goroutines
 * Synchronize concurrent tasks using `sync.WaitGroup`
+* Add request timeout handling using `context.WithTimeout()`
+* Cancel long-running AWS API requests automatically
 * Accept AWS region as a command-line argument
 * Configure AWS SDK region at runtime
 * Export inventory data to a JSON file
@@ -100,9 +102,18 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Concurrent API Calls
 * Basic Synchronization
 
+### Completed in Version 8
+
+* context.Context
+* context.WithTimeout()
+* defer cancel()
+* Request Cancellation
+* Timeout Management
+* Production-Ready API Patterns
+* Time-Based Resource Management
+
 ### Upcoming
 
-* Context and timeouts
 * Unit testing
 
 ## Roadmap
@@ -137,7 +148,7 @@ Collect inventory concurrently. ✅
 
 ### Version 8
 
-Add context and timeout handling.
+Add context and timeout handling. ✅
 
 ### Version 9
 
@@ -216,7 +227,7 @@ Generated file (`inventory.json`):
 }
 ```
 
-> The actual resource counts depend on the AWS account and region configured on your machine.
+> The actual resource counts depend on the AWS account, configured region, and AWS API response time.
 
 ## Validation
 
@@ -278,6 +289,10 @@ Expected:
 Error: ...
 ```
 
+### Timeout Handling
+
+Temporarily reduce the timeout (for example, to `1*time.Millisecond`) and verify that the application returns a timeout-related error.
+
 ### No EC2 Instances
 
 Expected:
@@ -325,6 +340,7 @@ PASS
 * JSON
 * Goroutines
 * sync.WaitGroup
+* context
 * Cloud APIs
 * Packages
 * Error Handling
@@ -347,6 +363,8 @@ Through this project I practiced:
 * Writing files using `os.WriteFile`
 * Using goroutines for concurrent execution
 * Coordinating concurrent tasks using `sync.WaitGroup`
+* Managing request lifecycles using `context.Context`
+* Implementing request timeouts with `context.WithTimeout()`
 * Creating reusable Go packages
 * Separating business logic from application logic
 * Handling cloud API errors
@@ -357,5 +375,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.7.0
+v0.8.0
 ```
