@@ -8,7 +8,7 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 8 Features
+## Version 9 Features
 
 * Collect EC2 inventory using AWS SDK for Go v2
 * Collect Amazon S3 bucket inventory
@@ -19,12 +19,16 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Accept AWS region as a command-line argument
 * Configure AWS SDK region at runtime
 * Export inventory data to a JSON file
+* Generate formatted inventory reports
+* Add unit tests for inventory export
+* Add unit tests for report generation
+* Use table-driven tests for multiple test scenarios
+* Measure test coverage using Go tooling
 * Aggregate inventory across multiple AWS services
 * Discover AWS credentials using the default credential chain
 * Connect to AWS APIs programmatically
 * Count EC2 instances across reservations
 * Count Amazon S3 buckets
-* Generate a formatted inventory report
 * Handle AWS SDK errors gracefully
 * Validate command-line input
 * Organize code using reusable Go packages
@@ -112,9 +116,22 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Production-Ready API Patterns
 * Time-Based Resource Management
 
+### Completed in Version 9
+
+* Go Testing Framework
+* `_test.go` Files
+* `go test`
+* Table-Driven Tests
+* Test Coverage
+* Report Generation Testing
+* JSON Export Testing
+* Test Assertions
+* Test Cleanup
+* Basic Testing Best Practices
+
 ### Upcoming
 
-* Unit testing
+* Production-ready refinements
 
 ## Roadmap
 
@@ -152,7 +169,7 @@ Add context and timeout handling. ✅
 
 ### Version 9
 
-Add unit tests.
+Add unit tests. ✅
 
 ### Version 10
 
@@ -164,7 +181,11 @@ Production-ready inventory reporting tool.
 aws-inventory-tool/
 ├── main.go
 ├── inventory/
-│   └── inventory.go
+│   ├── inventory.go
+│   └── inventory_test.go
+├── report/
+│   ├── report.go
+│   └── report_test.go
 ├── models/
 │   └── inventory.go
 ├── README.md
@@ -203,6 +224,32 @@ inventory.json
 
 in the project root.
 
+## Run Tests
+
+Execute all unit tests:
+
+```bash
+go test ./...
+```
+
+Run tests with verbose output:
+
+```bash
+go test -v ./...
+```
+
+Measure test coverage:
+
+```bash
+go test -cover ./...
+```
+
+Run the race detector:
+
+```bash
+go test -race ./...
+```
+
 ## Sample Output
 
 Console:
@@ -235,6 +282,8 @@ Generated file (`inventory.json`):
 go fmt ./...
 go mod tidy
 go build ./...
+go test ./...
+go test -cover ./...
 go test -race ./...
 go run main.go ap-south-1
 ```
@@ -317,6 +366,34 @@ EC2 Instances : X
 S3 Buckets    : 0
 ```
 
+### Unit Tests
+
+Run:
+
+```bash
+go test ./...
+```
+
+Expected:
+
+```text
+PASS
+```
+
+### Test Coverage
+
+Run:
+
+```bash
+go test -cover ./...
+```
+
+Expected:
+
+```text
+ok      github.com/theashishprasad/aws-inventory-tool/...    XX.X% coverage
+```
+
 ### Race Detection
 
 Run:
@@ -341,6 +418,7 @@ PASS
 * Goroutines
 * sync.WaitGroup
 * context
+* Go Testing
 * Cloud APIs
 * Packages
 * Error Handling
@@ -365,6 +443,10 @@ Through this project I practiced:
 * Coordinating concurrent tasks using `sync.WaitGroup`
 * Managing request lifecycles using `context.Context`
 * Implementing request timeouts with `context.WithTimeout()`
+* Writing unit tests using Go's `testing` package
+* Creating table-driven tests
+* Measuring test coverage
+* Validating application output through automated tests
 * Creating reusable Go packages
 * Separating business logic from application logic
 * Handling cloud API errors
@@ -375,5 +457,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.8.0
+v0.9.0
 ```
