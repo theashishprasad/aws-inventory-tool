@@ -8,7 +8,7 @@ This project is part of my Go learning journey focused on DevOps, Platform Engin
 
 Build an AWS inventory reporting tool while learning practical Go concepts used in cloud automation and infrastructure tooling.
 
-## Version 9 Features
+## Version 10 Features
 
 * Collect EC2 inventory using AWS SDK for Go v2
 * Collect Amazon S3 bucket inventory
@@ -41,7 +41,7 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Structs
 * JSON
 * Struct Tags
-* json.Unmarshal
+* `json.Unmarshal()`
 * File Reading
 * Error Handling
 
@@ -58,9 +58,9 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * AWS SDK for Go v2
 * Cloud APIs
 * AWS Authentication Chain
-* config.LoadDefaultConfig()
+* `config.LoadDefaultConfig()`
 * EC2 Client Creation
-* DescribeInstances API
+* `DescribeInstances`
 * API Response Processing
 * Infrastructure Inventory Collection
 
@@ -68,8 +68,8 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 
 * Multiple AWS Services
 * Amazon S3 SDK
-* s3.NewFromConfig()
-* ListBuckets API
+* `s3.NewFromConfig()`
+* `ListBuckets`
 * Aggregation
 * Multi-Service Reporting
 * Shared AWS Configuration
@@ -77,21 +77,21 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 
 ### Completed in Version 5
 
-* os.Args
+* `os.Args`
 * Command-Line Applications
 * CLI Input Validation
 * Runtime Configuration
-* config.WithRegion()
+* `config.WithRegion()`
 * AWS Region Selection
 * Parameterized Cloud API Requests
 
 ### Completed in Version 6
 
-* json.MarshalIndent()
+* `json.MarshalIndent()`
 * JSON Serialization
 * Pretty-Printed JSON
 * File Writing
-* os.WriteFile()
+* `os.WriteFile()`
 * Data Export
 * Structured Output
 
@@ -99,18 +99,18 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 
 * Goroutines
 * Concurrent Programming
-* sync.WaitGroup
-* WaitGroup.Add()
-* WaitGroup.Done()
-* WaitGroup.Wait()
+* `sync.WaitGroup`
+* `WaitGroup.Add()`
+* `WaitGroup.Done()`
+* `WaitGroup.Wait()`
 * Concurrent API Calls
 * Basic Synchronization
 
 ### Completed in Version 8
 
-* context.Context
-* context.WithTimeout()
-* defer cancel()
+* `context.Context`
+* `context.WithTimeout()`
+* `defer cancel()`
 * Request Cancellation
 * Timeout Management
 * Production-Ready API Patterns
@@ -129,9 +129,14 @@ Build an AWS inventory reporting tool while learning practical Go concepts used 
 * Test Cleanup
 * Basic Testing Best Practices
 
-### Upcoming
+### Completed in Version 10
 
-* Production-ready refinements
+* Production Project Structure
+* End-to-End Validation
+* Documentation
+* Release Management
+* Git Versioning
+* Production-Ready Go CLI Application
 
 ## Roadmap
 
@@ -173,7 +178,7 @@ Add unit tests. ✅
 
 ### Version 10
 
-Production-ready inventory reporting tool.
+Production-ready inventory reporting tool. ✅
 
 ## Project Structure
 
@@ -196,13 +201,13 @@ aws-inventory-tool/
 
 ## Prerequisites
 
-Install and configure AWS CLI:
+Install and configure the AWS CLI:
 
 ```bash
 aws configure
 ```
 
-Verify credentials:
+Verify your credentials:
 
 ```bash
 aws sts get-caller-identity
@@ -210,7 +215,7 @@ aws sts get-caller-identity
 
 ## How to Run
 
-Run the application by providing the AWS region:
+Run the application by providing an AWS region:
 
 ```bash
 go run main.go ap-south-1
@@ -226,7 +231,7 @@ in the project root.
 
 ## Run Tests
 
-Execute all unit tests:
+Run all unit tests:
 
 ```bash
 go test ./...
@@ -274,7 +279,7 @@ Generated file (`inventory.json`):
 }
 ```
 
-> The actual resource counts depend on the AWS account, configured region, and AWS API response time.
+> The actual resource counts depend on your AWS account, configured region, and current AWS resources.
 
 ## Validation
 
@@ -302,9 +307,9 @@ AWS Inventory Report
 Region        : ap-south-1
 EC2 Instances : X
 S3 Buckets    : Y
-```
 
-An `inventory.json` file should also be generated.
+Inventory exported to inventory.json
+```
 
 ### Missing CLI Argument
 
@@ -408,6 +413,19 @@ Expected:
 PASS
 ```
 
+## Project Highlights
+
+* AWS SDK for Go v2 integration
+* EC2 and Amazon S3 inventory collection
+* Concurrent API calls using goroutines
+* Request timeout handling with `context.WithTimeout()`
+* Command-line interface using `os.Args`
+* JSON export with `json.MarshalIndent()`
+* Unit tests with table-driven testing
+* Race detection support
+* Clean package structure
+* Production-ready Go CLI application
+
 ## Technologies Used
 
 * Go
@@ -416,8 +434,8 @@ PASS
 * Amazon S3
 * JSON
 * Goroutines
-* sync.WaitGroup
-* context
+* `sync.WaitGroup`
+* `context`
 * Go Testing
 * Cloud APIs
 * Packages
@@ -437,8 +455,8 @@ Through this project I practiced:
 * Passing runtime configuration into AWS SDK clients
 * Configuring AWS SDK with custom regions
 * Serializing Go structs into JSON
-* Exporting structured data using `json.MarshalIndent`
-* Writing files using `os.WriteFile`
+* Exporting structured data using `json.MarshalIndent()`
+* Writing files using `os.WriteFile()`
 * Using goroutines for concurrent execution
 * Coordinating concurrent tasks using `sync.WaitGroup`
 * Managing request lifecycles using `context.Context`
@@ -457,5 +475,5 @@ Through this project I practiced:
 Current Version:
 
 ```text
-v0.9.0
+v1.0.0
 ```
