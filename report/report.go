@@ -6,6 +6,7 @@ import (
 	"github.com/theashishprasad/aws-inventory-tool/models"
 )
 
+// GenerateReport formats an AWS inventory report for console output.
 func GenerateReport(i models.Inventory) string {
 	return fmt.Sprintf(`AWS Inventory Report
 

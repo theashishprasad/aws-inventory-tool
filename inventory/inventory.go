@@ -13,6 +13,7 @@ import (
 	"github.com/theashishprasad/aws-inventory-tool/models"
 )
 
+// LoadInventory collects EC2 instance and S3 bucket inventory for the specified AWS region.
 func LoadInventory(region string) (models.Inventory, error) {
 	var wg sync.WaitGroup
 	var inventory models.Inventory
@@ -79,6 +80,7 @@ func LoadInventory(region string) (models.Inventory, error) {
 	return inventory, nil
 }
 
+// ExportInventory exports inventory data as formatted JSON.
 func ExportInventory(fileName string, inventory models.Inventory) error {
 	jsonData, err := json.MarshalIndent(inventory, "", "	")
 	if err != nil {
